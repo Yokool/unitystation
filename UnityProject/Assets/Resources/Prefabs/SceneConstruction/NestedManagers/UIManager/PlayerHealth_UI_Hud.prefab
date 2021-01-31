@@ -1512,12 +1512,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41117fd98c2b04e9099257ff6cc45c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  critStart: 318
-  deathStart: 346
-  fullHealthStart: 178
-  medDmgStart: 234
-  minorDmgStart: 206
-  mjrDmgStart: 262
   overlayCrits: {fileID: 0}
   pulseImg: {fileID: 8122080334011333961}
   bgImage: {fileID: 0}
