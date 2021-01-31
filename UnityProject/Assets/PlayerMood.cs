@@ -149,30 +149,37 @@ public class PlayerMood : NetworkBehaviour
 	/// <returns></returns>
 	public List<string> GetMoodLines()
 	{
-		// TODO: FIX THIS
 		List<string> lines = new List<string>();
+		List<MoodEventType> processedTypes = new List<MoodEventType>();
+
 		for (int i = 0; i < currentAffectingMoodEvents.Count; ++i)
 		{
 			MoodEvent affectingMood = currentAffectingMoodEvents[i];
+			MoodEventType moodEventType = affectingMood.GetEventType();
 
 			string eventName = affectingMood.GetEventName();
-
-			if (lines.Contains(eventName)) // TODO: THE BIG BAD LINE
+			
+			if (processedTypes.Contains(moodEventType))
 			{
 				continue;
 			}
+			
+			int sameEventCount = currentAffectingMoodEvents.Count((otherMood) => {
+				return moodEventType.Equals(otherMood.GetEventType());
+			});
 
-			int nameCount = currentAffectingMoodEvents.Count((mood) => { return mood.GetEventName() == eventName; });
-
-			if (nameCount > 1)
+			if (sameEventCount > 1)
 			{
-				eventName += $" ({nameCount}x)";
+				eventName += $" ({sameEventCount}x)";
 			}
 
+			processedTypes.Add(moodEventType);
 			lines.Add(eventName);
 		}
 
+
 		return lines;
+
 	}
 
 	
@@ -190,7 +197,6 @@ public class PlayerMood : NetworkBehaviour
 		currentAffectingMoodEvents.Add(moodEvent);
 		ServerSendMoodUpdateToClient();
 		ServerSendNewEventToClient(moodEvent, false);
-		
 	}
 
 	[Server]
@@ -239,13 +245,17 @@ public class PlayerMood : NetworkBehaviour
 	
 	public MoodState GetOverallMood()
 	{
-		
-		int moodID = Mathf.CeilToInt(GetOverallMoodValue() / (float)GetNeurocity());
+		int overallMoodValue = GetOverallMoodValue();
+
+		// Done so -0.75 is -1 and not 0
+		int moodID = Mathf.CeilToInt(Math.Abs(overallMoodValue) / (float)GetNeurocity());
+		moodID *= (int)Mathf.Sign(overallMoodValue);
 
 		MoodState[] values = (MoodState[])Enum.GetValues(typeof(MoodState));
+		
+		int min = (int)values.Min();
+		int max = (int)values.Max();
 
-		int min = (int)values[0];
-		int max = (int)values[values.Length - 1];
 		moodID = Mathf.Clamp(moodID, min, max);
 
 		return (MoodState)moodID;

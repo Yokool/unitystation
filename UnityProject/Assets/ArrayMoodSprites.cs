@@ -41,6 +41,9 @@ public class ArrayMoodSprites : MonoBehaviour, IMoodSpriteProvider
 	{
 		MoodState[] moodStateEnums = (MoodState[])Enum.GetValues(typeof(MoodState));
 
+		// GetValues is sorted with the binary values, not arithmetically
+		Array.Sort(moodStateEnums);
+
 		for (int i = 0; i < moodStateEnums.Length; ++i)
 		{
 			MoodState moodStateEnum = moodStateEnums[i];
