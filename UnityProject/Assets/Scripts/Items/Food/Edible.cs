@@ -114,6 +114,11 @@ public class Edible : Consumable, ICheckedInteractable<HandActivate>
 		eater.playerHealth.Metabolism
 			.AddEffect(new MetabolismEffect(NutritionLevel, 0, MetabolismDuration.Food));
 
+		if(eater.TryGetComponent(out PlayerMood mood))
+		{
+			mood.ServerAddMood(MoodEventType.HAD_BITE_GOOD_FOOD);
+		}
+
 		var feederSlot = feeder.ItemStorage.GetActiveHandSlot();
 		//If food has a stack component, decrease amount by one instead of deleting the entire stack.
 		if (stackable != null)

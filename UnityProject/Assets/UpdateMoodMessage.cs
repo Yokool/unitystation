@@ -7,20 +7,17 @@ public class UpdateMoodMessage : IMessageBase
 	/// </summary>
 	private MoodState moodState;
 
-	/// <summary>
-	/// Contains a list of string representing the names of all the active <see cref="MoodEvent"/>s on the receiving player of this message.
-	/// </summary>
-	private string[] currentEventStrings;
+	private MoodEventType[] affectingTypes;
 
 	public UpdateMoodMessage()
 	{
 
 	}
 
-	public UpdateMoodMessage(MoodState moodState, string[] currentEventStrings)
+	public UpdateMoodMessage(MoodState moodState, MoodEventType[] affectingTypes)
 	{
 		SetMoodState(moodState);
-		SetCurrentEventStrings(currentEventStrings);
+		SetCurrentAffectingTypes(affectingTypes);
 	}
 
 
@@ -34,14 +31,14 @@ public class UpdateMoodMessage : IMessageBase
 		return this.moodState;
 	}
 
-	private void SetCurrentEventStrings(string[] currentEventStrings)
+	private void SetCurrentAffectingTypes(MoodEventType[] affectingTypes)
 	{
-		this.currentEventStrings = currentEventStrings;
+		this.affectingTypes = affectingTypes;
 	}
 
-	public string[] GetCurrentEventStrings()
+	public MoodEventType[] GetCurrentAffectingTypes()
 	{
-		return this.currentEventStrings;
+		return affectingTypes;
 	}
 
 	public void Deserialize(NetworkReader reader)
@@ -49,27 +46,27 @@ public class UpdateMoodMessage : IMessageBase
 		SetMoodState((MoodState)reader.ReadInt32());
 		
 		int length = reader.ReadInt32();
-		string[] curEventStrings = new string[length];
+		MoodEventType[] curEventStrings = new MoodEventType[length];
 
 		for(int i = 0; i < length; ++i)
 		{
-			curEventStrings[i] = reader.ReadString();
+			curEventStrings[i] = (MoodEventType)reader.ReadInt32();
 		}
 
-		SetCurrentEventStrings(curEventStrings);
+		SetCurrentAffectingTypes(curEventStrings);
 
 	}
 
 	public void Serialize(NetworkWriter writer)
 	{
 		writer.WriteInt32((int)GetMoodState());
-		
-		string[] currentEventStrings = GetCurrentEventStrings();
+
+		MoodEventType[] currentEventStrings = GetCurrentAffectingTypes();
 		writer.WriteInt32(currentEventStrings.Length);
 
 		for(int i = 0; i < currentEventStrings.Length; ++i)
 		{
-			writer.WriteString(currentEventStrings[i]);
+			writer.WriteInt32((int)currentEventStrings[i]);
 		}
 
 	}

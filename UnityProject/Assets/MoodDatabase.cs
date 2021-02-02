@@ -11,23 +11,17 @@ public static class MoodDatabase
 	private static readonly Dictionary<MoodEventType, MoodEvent> moodEventPrototypes = new Dictionary<MoodEventType, MoodEvent>()
 	{
 		{
-			MoodEventType.DEBUG_POSITIVE,
-			new MoodEvent("DEBUG_POSITIVE", 101, 60f)
+			MoodEventType.HAD_BITE_GOOD_FOOD,
+			new MoodEvent("I've had a bite of tasty food", 101, 60f)
 		},
 		{
-			MoodEventType.DEBUG_NEGATIVE,
-			new MoodEvent("DEBUG_NEGATIVE", -101, 60f)
-		},
-		{
-			MoodEventType.DEBUG_NEUTRAL,
-			new MoodEvent("DEBUG_NEUTRAL", 0, 60f)
+			MoodEventType.HAD_BITE_BAD_FOOD,
+			new MoodEvent("I've had a bite of disgusting food", -101, 60f)
 		}
 	};
 
 	[UnityEditor.Callbacks.DidReloadScripts]
-#pragma warning disable IDE0051 // Remove unused private members
 	private static void MoodPrototypesCheck()
-#pragma warning restore IDE0051 // Remove unused private members
 	{
 
 		MoodEventType[] moodEvents = (MoodEventType[])Enum.GetValues(typeof(MoodEventType));
@@ -48,6 +42,9 @@ public static class MoodDatabase
 
 	static MoodDatabase()
 	{
+
+		MoodPrototypesCheck();
+
 		foreach(KeyValuePair<MoodEventType, MoodEvent> moodEventAndType in moodEventPrototypes.AsEnumerable())
 		{
 			moodEventAndType.Value.SetEventType(moodEventAndType.Key);

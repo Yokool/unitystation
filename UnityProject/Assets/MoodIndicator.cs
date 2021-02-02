@@ -11,7 +11,7 @@ public class MoodIndicator : MonoBehaviour
 
 	private Image moodImage;
 
-	private string[] cachedEventLines = null;
+	private List<string> cachedEventLines = null;
 
 	private void OnEnable()
 	{
@@ -34,7 +34,7 @@ public class MoodIndicator : MonoBehaviour
 
 	}
 
-	public void SetCachedEventLines(string[] cachedEventLines)
+	public void SetCachedEventLines(List<string> cachedEventLines)
 	{
 		this.cachedEventLines = cachedEventLines;
 	}
@@ -47,7 +47,7 @@ public class MoodIndicator : MonoBehaviour
 			return;
 		}
 
-		for (int i = 0; i < cachedEventLines.Length; ++i)
+		for (int i = 0; i < cachedEventLines.Count; ++i)
 		{
 			string line = cachedEventLines[i];
 			Chat.AddExamineMsgToClient(line);

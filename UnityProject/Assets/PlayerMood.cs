@@ -71,10 +71,14 @@ public class PlayerMood : NetworkBehaviour
 		
 		MoodState overallMood = GetOverallMood();
 
-		string[] currentEventNames = GetMoodLines().ToArray();
-		UpdateMoodMessage updateMoodMessage = new UpdateMoodMessage(overallMood, currentEventNames);
+		UpdateMoodMessage updateMoodMessage = new UpdateMoodMessage(overallMood, GetAffectingMoodEventTypes());
 
 		connectionToClient.Send(updateMoodMessage);
+	}
+
+	private MoodEventType[] GetAffectingMoodEventTypes()
+	{
+		return currentAffectingMoodEvents.Select((moodEvent) => { return moodEvent.GetEventType(); }).ToArray();
 	}
 
 	[Server]
@@ -97,7 +101,7 @@ public class PlayerMood : NetworkBehaviour
 	private void ClientMoodUpdate(UpdateMoodMessage msg)
 	{
 		MoodState msgMoodState = msg.GetMoodState();
-		string[] currentEventStrings = msg.GetCurrentEventStrings();
+		List<string> currentEventStrings = PlayerMood.GetMoodLines(msg.GetCurrentAffectingTypes());
 
 		ClientPrintMoodUpdateMsg(msgMoodState);
 		lastClientMoodState = msgMoodState;
@@ -131,7 +135,7 @@ public class PlayerMood : NetworkBehaviour
 
 	}
 
-	private void ClientUpdateIndicator(MoodState msgMoodState, string[] currentEventStrings)
+	private void ClientUpdateIndicator(MoodState msgMoodState, List<string> currentEventStrings)
 	{
 		MoodIndicator indicator = UIManager.Instance.moodIndicator;
 
@@ -193,26 +197,34 @@ public class PlayerMood : NetworkBehaviour
 	/// Ate good food. (2x)
 	/// </summary>
 	/// <returns></returns>
-	public List<string> GetMoodLines()
+	public static List<string> GetMoodLines(MoodEventType[] moodEventTypes)
 	{
 		List<string> lines = new List<string>();
 		List<MoodEventType> processedTypes = new List<MoodEventType>();
 
-		for (int i = 0; i < currentAffectingMoodEvents.Count; ++i)
+		for (int i = 0; i < moodEventTypes.Length; ++i)
 		{
-			MoodEvent affectingMood = currentAffectingMoodEvents[i];
-			MoodEventType moodEventType = affectingMood.GetEventType();
+			MoodEventType moodEventType = moodEventTypes[i];
 
-			string eventName = affectingMood.GetEventName();
+			string eventName = MoodDatabase.GetMoodEventInstance(moodEventType).GetEventName();
 			
 			if (processedTypes.Contains(moodEventType))
 			{
 				continue;
 			}
-			
-			int sameEventCount = currentAffectingMoodEvents.Count((otherMood) => {
-				return moodEventType.Equals(otherMood.GetEventType());
-			});
+
+			int sameEventCount = 1;
+
+			for(int j = i + 1; j < moodEventTypes.Length; ++j)
+			{
+				MoodEventType differentMember = moodEventTypes[j];
+
+				if (differentMember.Equals(moodEventType))
+				{
+					++sameEventCount;
+				}
+
+			}
 
 			if (sameEventCount > 1)
 			{
@@ -227,6 +239,21 @@ public class PlayerMood : NetworkBehaviour
 		return lines;
 
 	}
+
+	public List<string> GetMoodLines()
+	{
+
+		List<MoodEventType> moodEventTypes = new List<MoodEventType>();
+
+		for(int i = 0; i < currentAffectingMoodEvents.Count; ++i)
+		{
+			moodEventTypes.Add(currentAffectingMoodEvents[i].GetEventType());
+		}
+
+		return PlayerMood.GetMoodLines(moodEventTypes.ToArray());
+
+	}
+
 
 	[Server]
 	public void ServerAddMood(MoodEventType moodEventType)
