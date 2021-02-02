@@ -25,25 +25,6 @@ public class MoodEventMessage : IMessageBase
 		return this.moodShift;
 	}
 
-	public string MoodUpdateString()
-	{
-		int shift = GetMoodShift();
-
-		if (shift == 0)
-		{
-			return "I feel indifferent.";
-		}
-		else if (shift >= 0)
-		{
-			return "My mood gets better.";
-		}
-		else
-		{
-			return "My mood gets worse.";
-		}
-
-	}
-
 	public void Deserialize(NetworkReader reader)
 	{
 		SetMoodShift(reader.ReadInt32());

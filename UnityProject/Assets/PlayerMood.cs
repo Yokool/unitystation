@@ -28,6 +28,12 @@ public class PlayerMood : NetworkBehaviour
 	[SerializeField]
 	private int neurocity = 100;
 
+	/// <summary>
+	/// Used on the client to hold the MoodState of the last received mood message.
+	/// Initialized to null, before the client gets the first message from the server.
+	/// </summary>
+	private MoodState? lastClientMoodState = null;
+
 	public override void OnStartServer()
 	{
 		base.OnStartServer();
@@ -37,7 +43,6 @@ public class PlayerMood : NetworkBehaviour
 	public override void OnStartClient()
 	{
 		base.OnStartClient();
-		Debug.Log("Registering messages.");
 		NetworkClient.RegisterHandler<UpdateMoodMessage>(ClientMoodUpdate);
 		NetworkClient.RegisterHandler<MoodEventMessage>(ClientEventUpdate);
 
@@ -91,6 +96,43 @@ public class PlayerMood : NetworkBehaviour
 
 	private void ClientMoodUpdate(UpdateMoodMessage msg)
 	{
+		MoodState msgMoodState = msg.GetMoodState();
+		string[] currentEventStrings = msg.GetCurrentEventStrings();
+
+		ClientPrintMoodUpdateMsg(msgMoodState);
+		lastClientMoodState = msgMoodState;
+
+		ClientUpdateIndicator(msgMoodState, currentEventStrings);
+	}
+
+	private void ClientPrintMoodUpdateMsg(MoodState newMoodState)
+	{
+		if (!lastClientMoodState.HasValue)
+		{
+			return;
+		}
+
+		int newMoodStateInt = (int)newMoodState;
+		int lastClientMoodStateInt = (int)lastClientMoodState;
+
+		if (newMoodState == lastClientMoodState)
+		{
+			return;
+		}
+
+		if (newMoodStateInt > lastClientMoodStateInt)
+		{
+			Chat.AddExamineMsgToClient("My mood gets better.");
+		}
+		else
+		{
+			Chat.AddExamineMsgToClient("My mood gets worse.");
+		}
+
+	}
+
+	private void ClientUpdateIndicator(MoodState msgMoodState, string[] currentEventStrings)
+	{
 		MoodIndicator indicator = UIManager.Instance.moodIndicator;
 
 		if (indicator == null)
@@ -99,14 +141,18 @@ public class PlayerMood : NetworkBehaviour
 			return;
 		}
 
-		indicator.UpdateIndicator(msg.GetMoodState());
-		indicator.SetCachedEventLines(msg.GetCurrentEventStrings());
+		indicator.UpdateIndicator(msgMoodState);
+		indicator.SetCachedEventLines(currentEventStrings);
 	}
 
+	/// <summary>
+	/// Called on the client from the server, when a new <see cref="MoodEvent"/> is added to this player on the server or if an already present event is removed
+	/// on the server from this client.
+	/// </summary>
+	/// <param name="msg"></param>
 	private void ClientEventUpdate(MoodEventMessage msg)
 	{
-		string chatString = msg.MoodUpdateString();
-		Chat.AddExamineMsgToClient(chatString);
+		// Purposefuly nothing right now
 	}
 
 	[Server]
@@ -182,8 +228,6 @@ public class PlayerMood : NetworkBehaviour
 
 	}
 
-	
-
 	[Server]
 	public void ServerAddMood(MoodEventType moodEventType)
 	{
@@ -232,13 +276,13 @@ public class PlayerMood : NetworkBehaviour
 		return endSum;
 	}
 
-	private void SetNeurocity(int neurocity)
+	public void SetNeurocity(int neurocity)
 	{
 		// Having to change the overall mood by 0 to get to the next category doesn't make sense.
 		this.neurocity = neurocity != 0 ? neurocity : 1;
 	}
 
-	private int GetNeurocity()
+	public int GetNeurocity()
 	{
 		return this.neurocity;
 	}
@@ -261,6 +305,7 @@ public class PlayerMood : NetworkBehaviour
 		return (MoodState)moodID;
 	}
 
+	[Server]
 	public bool IsAfflictedWith(MoodEventType afflictionType)
 	{
 		return currentAffectingMoodEvents.Any((moodEvent) => { return moodEvent.GetEventType().Equals(afflictionType); });
