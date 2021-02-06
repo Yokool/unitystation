@@ -55,6 +55,7 @@ public class UIManager : MonoBehaviour, IInitialise
 	private bool preventChatInput;
 	[SerializeField] [Range(0.1f,10f)] private float PhoneZoomFactor = 1.6f;
 	public LobbyUIPlayerListController lobbyUIPlayerListController = null;
+	public MoodIndicator moodIndicator;
 
 	public static bool PreventChatInput
 	{
