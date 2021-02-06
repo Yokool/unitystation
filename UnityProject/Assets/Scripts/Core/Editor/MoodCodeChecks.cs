@@ -17,11 +17,6 @@ public static class MoodCodeChecks
 			return;
 		}
 
-		if (moodStateLength % 2 == 0)
-		{
-			Debug.LogError($"Mood System Logical Error: {nameof(MoodState)} must have an odd number of values.");
-		}
-
 	}
 
 }

@@ -6,21 +6,37 @@ using UnityEngine;
 public static class MoodDatabase
 {
 	/// <summary>
-	/// 
+	/// Consider looking at <see cref="PlayerMood.neurocity"/> when deciding for the value of the mood event. The initialized value is the default standard
+	/// for all objects with a mood component.
 	/// </summary>
 	private static readonly Dictionary<MoodEventType, MoodEvent> moodEventPrototypes = new Dictionary<MoodEventType, MoodEvent>()
 	{
 		{
 			MoodEventType.HAD_BITE_GOOD_FOOD,
-			new MoodEvent("I've had a bite of tasty food", 101, 60f)
+			new MoodEvent("I've had some tasty food!", 50, 60f)
+		},
+		{
+			MoodEventType.HAD_BITE_VERY_GOOD_FOOD,
+			new MoodEvent("I've had some exquisite food!", 100, 120f)
+		},
+		{
+			MoodEventType.HAD_BITE_WONDERFUL_FOOD,
+			new MoodEvent("I've NEVER tasted anything more WONDERFUL!", 250, 240f)
 		},
 		{
 			MoodEventType.HAD_BITE_BAD_FOOD,
-			new MoodEvent("I've had a bite of disgusting food", -101, 60f)
+			new MoodEvent("I've eaten some off-tasting food.", -50, 240f)
+		},
+		{
+			MoodEventType.HAD_BITE_VERY_BAD_FOOD,
+			new MoodEvent("I've eaten some disgusting food.", -100, 120f)
+		},
+		{
+			MoodEventType.HAD_BITE_HORRIBLE,
+			new MoodEvent("I've eaten some HORRIBLE food. The memory of it BURNT onto my tongue continues to plague my mind and stomach!", -250, 240f)
 		}
 	};
 
-	[UnityEditor.Callbacks.DidReloadScripts]
 	private static void MoodPrototypesCheck()
 	{
 

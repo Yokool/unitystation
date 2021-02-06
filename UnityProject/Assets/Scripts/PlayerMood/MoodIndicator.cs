@@ -41,7 +41,7 @@ public class MoodIndicator : MonoBehaviour
 
 	public void MoodOnClick()
 	{
-		Chat.AddExamineMsgToClient("Current affecting events:");
+		Chat.AddExamineMsgToClient("How I feel:");
 		if(cachedEventLines == null)
 		{
 			return;
