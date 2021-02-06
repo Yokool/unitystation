@@ -9631,7 +9631,7 @@ MonoBehaviour:
   antagBanner: {fileID: 9112774073186637723}
   PhoneZoomFactor: 1.6
   lobbyUIPlayerListController: {fileID: 8978380966267964358}
-  moodIndicator: {fileID: 7528663629967100391}
+  moodIndicator: {fileID: 3099068976526984635}
   isInputFocus: 0
 --- !u!114 &8587366065717414501
 MonoBehaviour:
@@ -11883,16 +11883,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3bdf2778373f4fdfacd9dea1ec3755d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7528663629967100391 stripped
+--- !u!114 &3099068976526984635 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6970090678681115910, guid: dce598afa2b1da0479521c4371d8e60e,
+  m_CorrespondingSourceObject: {fileID: 2577055098534891866, guid: dce598afa2b1da0479521c4371d8e60e,
     type: 3}
   m_PrefabInstance: {fileID: 630947213599249633}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f75748eb0911042958cd1af1cff77c, type: 3}
+  m_Script: {fileID: 11500000, guid: c9b54946718c5774d963ce98803fc7f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8804091477230274786 stripped
@@ -13160,12 +13160,12 @@ PrefabInstance:
     - target: {fileID: 5420702621447585668, guid: 7e170a9c9286e41469cecbe1717fdbd4,
         type: 3}
       propertyPath: m_Size
-      value: 0.00000013078962
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5420702621447585668, guid: 7e170a9c9286e41469cecbe1717fdbd4,
         type: 3}
       propertyPath: m_Value
-      value: 0.00000003118236
+      value: -0.00000006236472
       objectReference: {fileID: 0}
     - target: {fileID: 5420804678553840072, guid: 7e170a9c9286e41469cecbe1717fdbd4,
         type: 3}
@@ -14588,7 +14588,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300016, guid: 5f4f6721c5bda204bafa4dfba79e645e,
+      objectReference: {fileID: 21300022, guid: 5f4f6721c5bda204bafa4dfba79e645e,
         type: 3}
     - target: {fileID: 766307428222084931, guid: 58f6348968bc83047b6bc0bf73e60380,
         type: 3}
