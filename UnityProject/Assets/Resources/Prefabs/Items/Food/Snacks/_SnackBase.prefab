@@ -25,7 +25,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leavings: {fileID: 0}
-  copyPlantDataToLeavings: 0
   eatSound:
     SetLoadSetting: 0
     AssetAddress: Assets/Prefabs/Effects/EatFood.prefab
@@ -34,7 +33,6 @@ MonoBehaviour:
       m_SubObjectName: 
       m_SubObjectType: 
   NutritionLevel: 10
-  tasteQuality: 3
 --- !u!1001 &1737151937450733888
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45,7 +43,7 @@ PrefabInstance:
     - target: {fileID: 783851887035088007, guid: 6eb9748e1eaf8dc4598a50e5b09df3b3,
         type: 3}
       propertyPath: m_Name
-      value: _SnackBase
+      value: SnackBase
       objectReference: {fileID: 0}
     - target: {fileID: 789061236122354163, guid: 6eb9748e1eaf8dc4598a50e5b09df3b3,
         type: 3}
@@ -109,6 +107,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 868446610880926693, guid: 6eb9748e1eaf8dc4598a50e5b09df3b3,
         type: 3}
+      propertyPath: initialTraits.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 868446610880926693, guid: 6eb9748e1eaf8dc4598a50e5b09df3b3,
+        type: 3}
       propertyPath: initialName
       value: snack
       objectReference: {fileID: 0}
@@ -116,11 +119,6 @@ PrefabInstance:
         type: 3}
       propertyPath: initialDescription
       value: Yummy.
-      objectReference: {fileID: 0}
-    - target: {fileID: 868446610880926693, guid: 6eb9748e1eaf8dc4598a50e5b09df3b3,
-        type: 3}
-      propertyPath: initialTraits.Array.size
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 868446610880926693, guid: 6eb9748e1eaf8dc4598a50e5b09df3b3,
         type: 3}
