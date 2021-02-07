@@ -741,7 +741,6 @@ GameObject:
   - component: {fileID: 7092917086790084979}
   - component: {fileID: 8325930460559460490}
   - component: {fileID: 6976858337500742754}
-  - component: {fileID: 5943321198671590192}
   m_Layer: 8
   m_Name: Player_V3(uNet)
   m_TagString: Untagged
@@ -1414,21 +1413,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passableExclusions: []
---- !u!114 &5943321198671590192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1133514949248654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5853ce3ddb8d5fc4fb843337e443fad4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  neurocity: 100
 --- !u!1 &1147423205297840
 GameObject:
   m_ObjectHideFlags: 0
@@ -9485,7 +9469,7 @@ SpriteRenderer:
   m_SortingLayerID: -902452607
   m_SortingLayer: 22
   m_SortingOrder: 20
-  m_Sprite: {fileID: -4549444404219585148, guid: 2adbceb9cc674484cb9a2c58b41d5493,
+  m_Sprite: {fileID: 7660122581263827943, guid: 2adbceb9cc674484cb9a2c58b41d5493,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
