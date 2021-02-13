@@ -220,12 +220,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clothData: {fileID: 11400000, guid: 5f1350a734e527941bd7c6eec964a984, type: 2}
-  variantType: 0
+  currentClothData: {fileID: 11400000, guid: 5f1350a734e527941bd7c6eec964a984, type: 2}
+  allClothingData:
+  - {fileID: 11400000, guid: acc8946229aa8834f8dd2ea8533648ff, type: 2}
+  randomInitialClothData: 0
   hidesIdentity: 0
   hidesSlots: 0
   hideClothingFlags: 0
-  SpriteDataSO: []
 --- !u!1001 &3139079831027586327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -256,6 +257,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4614094803234074905, guid: a940a8ef1ee65024fb0a322703040d98,
         type: 3}
+      propertyPath: pinPrefab
+      value: 
+      objectReference: {fileID: 109032868588680718, guid: 445a2ff9261814a549e8c255bb2580aa,
+        type: 3}
+    - target: {fileID: 4614094803234074905, guid: a940a8ef1ee65024fb0a322703040d98,
+        type: 3}
       propertyPath: Projectile
       value: 
       objectReference: {fileID: 21396104557255652, guid: b0bb7b40f7e10864e9bba0bd2123cfcb,
@@ -270,6 +277,11 @@ PrefabInstance:
         type: 3}
       propertyPath: FiringSound
       value: ShootLMG
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614094803234074905, guid: a940a8ef1ee65024fb0a322703040d98,
+        type: 3}
+      propertyPath: allowPinSwap
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4614094803234074905, guid: a940a8ef1ee65024fb0a322703040d98,
         type: 3}

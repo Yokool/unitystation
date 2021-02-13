@@ -2,6 +2,19 @@
 ---
 
 
+* 2021/2/12: Player lights now update sprite on player character where relevant (e.g. hardhat headlamps). by [NoooneyDude](https://github.com/NoooneyDude) in PR #[6002](https://github.com/unitystation/unitystation/pull/6002)
+* 2021/2/12: Tesla now moves through walls and does correct damage by [ThatDan123](https://github.com/ThatDan123) in PR #[6010](https://github.com/unitystation/unitystation/pull/6010)
+* 2021/2/12: Fixed escape and close button not working on menu by [ThatDan123](https://github.com/ThatDan123) in PR #[6010](https://github.com/unitystation/unitystation/pull/6010)
+* 2021/2/12: Adds some emitters and other stuff to box, square and outpost, not full PA set up by [ThatDan123](https://github.com/ThatDan123) in PR #[6010](https://github.com/unitystation/unitystation/pull/6010)
+* 2021/2/12: Removed fugitive from traitor gamemode by [ThatDan123](https://github.com/ThatDan123) in PR #[6010](https://github.com/unitystation/unitystation/pull/6010)
+* 2021/2/11: Adds grounding rods and tesla coils by [ThatDan123](https://github.com/ThatDan123) in PR #[5998](https://github.com/unitystation/unitystation/pull/5998)
+* 2021/2/11: Adds Tesla Energy Ball by [ThatDan123](https://github.com/ThatDan123) in PR #[5998](https://github.com/unitystation/unitystation/pull/5998)
+* 2021/2/10: Added particle accelerator, can be obtained through cargo by [ThatDan123](https://github.com/ThatDan123) in PR #[5975](https://github.com/unitystation/unitystation/pull/5975)
+* 2021/2/8: Adds job banner when spawning as non-antag, though to distinguish from antag spawn there's no background colour by [ThatDan123](https://github.com/ThatDan123) in PR #[5970](https://github.com/unitystation/unitystation/pull/5970)
+* 2021/2/8: Fixed bad bug in sound manager, which broke logic for changing sounds after they have started playing. by [ThatDan123](https://github.com/ThatDan123) in PR #[5970](https://github.com/unitystation/unitystation/pull/5970)
+* 2021/2/8: Fixed music and juke box by [ThatDan123](https://github.com/ThatDan123) in PR #[5970](https://github.com/unitystation/unitystation/pull/5970)
+* 2021/2/8: Adds field generators, emitters and radiation collectors by [ThatDan123](https://github.com/ThatDan123) in PR #[5960](https://github.com/unitystation/unitystation/pull/5960)
+* 2021/2/8: Adds singularity by [ThatDan123](https://github.com/ThatDan123) in PR #[5960](https://github.com/unitystation/unitystation/pull/5960)
 * 2021/2/5: fixed NRE when interacting with chickens with no item in hand. by [corp-0](https://github.com/corp-0) in PR #[5914](https://github.com/unitystation/unitystation/pull/5914)
 * 2021/2/5: added feedable component as a generic way to make mobs able to be fed by hand. by [corp-0](https://github.com/corp-0) in PR #[5914](https://github.com/unitystation/unitystation/pull/5914)
 * 2021/2/5: added milkable component to milk mobs based on their mood. by [corp-0](https://github.com/corp-0) in PR #[5914](https://github.com/unitystation/unitystation/pull/5914)

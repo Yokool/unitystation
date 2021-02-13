@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Systems.Explosions;
 using Light2D;
 using Mirror;
 using UnityEngine;
 using Effects.Overlays;
+using Systems.Clothing;
 
 /// <summary>
 /// Handle displaying the sprites related to player, which includes underwear and the body.
@@ -13,7 +15,7 @@ using Effects.Overlays;
 /// </summary>
 [RequireComponent(typeof(Directional))]
 [RequireComponent(typeof(PlayerScript))]
-public class PlayerSprites : MonoBehaviour
+public class PlayerSprites : MonoBehaviour, IOnLightningHit
 {
 	#region Inspector fields
 
@@ -245,6 +247,11 @@ public class PlayerSprites : MonoBehaviour
 		{
 			electrocutedOverlay.StartOverlay(directional.CurrentDirection);
 		}
+	}
+
+	public void OnLightningHit(float duration, float damage)
+	{
+		EnableElectrocutedOverlay(duration);
 	}
 
 	/// <summary>
