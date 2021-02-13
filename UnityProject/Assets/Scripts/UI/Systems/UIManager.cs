@@ -13,6 +13,7 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UI.Core.Windows;
 using UI.Windows;
+using MoodSystem;
 
 public class UIManager : MonoBehaviour, IInitialise
 {

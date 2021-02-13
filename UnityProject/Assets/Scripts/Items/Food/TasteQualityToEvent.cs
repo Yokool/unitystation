@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 
-public static class TasteQualityToEvent
+namespace MoodSystem
 {
+	public static class TasteQualityToEvent
+	{
 
-	private static readonly Dictionary<TasteQuality, MoodEventType> tasteQualityToEvent = new Dictionary<TasteQuality, MoodEventType>()
+		private static readonly Dictionary<TasteQuality, MoodEventType> tasteQualityToEvent = new Dictionary<TasteQuality, MoodEventType>()
 	{
 		{
 			TasteQuality.VOMIT_INDUCING,
@@ -32,9 +34,10 @@ public static class TasteQualityToEvent
 
 	};
 
-	public static MoodEventType ToEventType(TasteQuality tasteQuality)
-	{
-		return tasteQualityToEvent[tasteQuality];
-	}
+		public static MoodEventType ToEventType(TasteQuality tasteQuality)
+		{
+			return tasteQualityToEvent[tasteQuality];
+		}
 
+	}
 }

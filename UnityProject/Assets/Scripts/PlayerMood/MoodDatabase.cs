@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public static class MoodDatabase
+namespace MoodSystem
 {
-	/// <summary>
-	/// Consider looking at <see cref="PlayerMood.neurocity"/> when deciding for the value of the mood event. The initialized value is the default standard
-	/// for all objects with a mood component.
-	/// </summary>
-	private static readonly Dictionary<MoodEventType, MoodEvent> moodEventPrototypes = new Dictionary<MoodEventType, MoodEvent>()
+	public static class MoodDatabase
+	{
+		/// <summary>
+		/// Consider looking at <see cref="PlayerMood.neurocity"/> when deciding for the value of the mood event. The initialized value is the default standard
+		/// for all objects with a mood component.
+		/// </summary>
+		private static readonly Dictionary<MoodEventType, MoodEvent> moodEventPrototypes = new Dictionary<MoodEventType, MoodEvent>()
 	{
 		{
 			MoodEventType.HAD_BITE_GOOD_FOOD,
@@ -37,47 +39,49 @@ public static class MoodDatabase
 		}
 	};
 
-	private static void MoodPrototypesCheck()
-	{
-
-		MoodEventType[] moodEvents = (MoodEventType[])Enum.GetValues(typeof(MoodEventType));
-
-		for(int i = 0; i < moodEvents.Length; ++i)
+		private static void MoodPrototypesCheck()
 		{
-			MoodEventType moodEvent = moodEvents[i];
 
-			if (!moodEventPrototypes.ContainsKey(moodEvent))
+			MoodEventType[] moodEvents = (MoodEventType[])Enum.GetValues(typeof(MoodEventType));
+
+			for (int i = 0; i < moodEvents.Length; ++i)
 			{
-				Debug.LogWarning($"Mood System Warning: {nameof(moodEventPrototypes)} doesn't have a prototype entry for a {moodEvent}. No object will be instantiated when such enum value is entered.");
+				MoodEventType moodEvent = moodEvents[i];
+
+				if (!moodEventPrototypes.ContainsKey(moodEvent))
+				{
+					Debug.LogWarning($"Mood System Warning: {nameof(moodEventPrototypes)} doesn't have a prototype entry for a {moodEvent}. No object will be instantiated when such enum value is entered.");
+				}
+
 			}
 
+
 		}
 
-
-	}
-
-	static MoodDatabase()
-	{
-
-		MoodPrototypesCheck();
-
-		foreach(KeyValuePair<MoodEventType, MoodEvent> moodEventAndType in moodEventPrototypes.AsEnumerable())
+		static MoodDatabase()
 		{
-			moodEventAndType.Value.SetEventType(moodEventAndType.Key);
+
+			MoodPrototypesCheck();
+
+			foreach (KeyValuePair<MoodEventType, MoodEvent> moodEventAndType in moodEventPrototypes.AsEnumerable())
+			{
+				moodEventAndType.Value.SetEventType(moodEventAndType.Key);
+			}
 		}
-	}
 
-	public static MoodEvent GetMoodEventInstance(MoodEventType moodEventType)
-	{
-
-		if (!moodEventPrototypes.ContainsKey(moodEventType))
+		public static MoodEvent GetMoodEventInstance(MoodEventType moodEventType)
 		{
-			return null;
+
+			if (!moodEventPrototypes.ContainsKey(moodEventType))
+			{
+				return null;
+			}
+
+			MoodEvent prototype = moodEventPrototypes[moodEventType];
+			return new MoodEvent(prototype);
 		}
 
-		MoodEvent prototype = moodEventPrototypes[moodEventType];
-		return new MoodEvent(prototype);
+
 	}
-
-
 }
+

@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 using Items;
 using AddressableReferences;
 using Systems.Botany;
+using MoodSystem;
 
 /// <summary>
 /// Indicates an edible object
