@@ -26,6 +26,8 @@ namespace MoodSystem
 		/// </summary>
 		private List<string> cachedEventLines = null;
 
+		public bool IsEnabled => gameObject.activeInHierarchy;
+
 		private void OnEnable()
 		{
 			moodImage = GetComponent<Image>();

@@ -43,10 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdad2d3b11224e58b19f7f483935abc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxDamage: 200
+  livingHealthBehaviour: {fileID: 0}
   Type: 2
   isBleeding: 0
-  livingHealthBehaviour: {fileID: 0}
   Severity: 0
   armor:
     Melee: 0
@@ -524,10 +523,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdad2d3b11224e58b19f7f483935abc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxDamage: 200
+  livingHealthBehaviour: {fileID: 0}
   Type: 5
   isBleeding: 0
-  livingHealthBehaviour: {fileID: 0}
   Severity: 0
   armor:
     Melee: 0
@@ -741,6 +739,7 @@ GameObject:
   - component: {fileID: 7092917086790084979}
   - component: {fileID: 8325930460559460490}
   - component: {fileID: 6976858337500742754}
+  - component: {fileID: 7391537548674445482}
   m_Layer: 8
   m_Name: Player_V3(uNet)
   m_TagString: Untagged
@@ -1413,6 +1412,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passableExclusions: []
+--- !u!114 &7391537548674445482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133514949248654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5853ce3ddb8d5fc4fb843337e443fad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  neurocity: 100
 --- !u!1 &1147423205297840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1919,10 +1933,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b6bad0196f4cca947cdfe73fcf7ca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxDamage: 200
+  livingHealthBehaviour: {fileID: 0}
   Type: 1
   isBleeding: 0
-  livingHealthBehaviour: {fileID: 0}
   Severity: 0
   armor:
     Melee: 0
@@ -2704,10 +2717,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdad2d3b11224e58b19f7f483935abc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxDamage: 200
+  livingHealthBehaviour: {fileID: 0}
   Type: 3
   isBleeding: 0
-  livingHealthBehaviour: {fileID: 0}
   Severity: 0
   armor:
     Melee: 0
@@ -3584,10 +3596,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 286e2ff4e04b48b0b91e6ebfc4b212f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxDamage: 200
+  livingHealthBehaviour: {fileID: 0}
   Type: 0
   isBleeding: 0
-  livingHealthBehaviour: {fileID: 0}
   Severity: 0
   armor:
     Melee: 0
@@ -3643,10 +3654,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdad2d3b11224e58b19f7f483935abc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxDamage: 200
+  livingHealthBehaviour: {fileID: 0}
   Type: 4
   isBleeding: 0
-  livingHealthBehaviour: {fileID: 0}
   Severity: 0
   armor:
     Melee: 0

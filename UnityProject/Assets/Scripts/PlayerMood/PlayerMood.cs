@@ -136,7 +136,12 @@ namespace MoodSystem
 		}
 
 		/// <summary>
-		/// Clientisde
+		/// Clientside
+		/// Prints a message to the client chat if the <see cref="UpdateMoodMessage"/> caused the client
+		/// to switch to a different <see cref="MoodState"/> enum value.
+		///
+		/// Lower -> Higher = My mood gets better.
+		/// Higher -> Lower = My mood gets worse.
 		/// </summary>
 		/// <param name="newMoodState"></param>
 		private void ClientPrintMoodUpdateMsg(MoodState newMoodState)
@@ -182,6 +187,11 @@ namespace MoodSystem
 				return;
 			}
 
+			if (!indicator.IsEnabled)
+			{
+				return;
+			}
+
 			indicator.UpdateIndicator(msgMoodState);
 			indicator.SetCachedEventLines(currentEventStrings);
 		}
@@ -199,7 +209,7 @@ namespace MoodSystem
 		/// <summary>
 		/// Serverside.
 		/// Called periodically as defined by <see cref="MOOD_UPDATE_TIME"/>.
-		/// Removes <see cref="MoodEvent"/> instances from this component when they expire.
+		/// Removes affecting <see cref="MoodEvent"/> event instances from this component when they expire (their remaining time gets to 0).
 		/// </summary>
 		[Server]
 		public void ServerPeriodicMoodUpdate()
