@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 using Items;
 using AddressableReferences;
 using Systems.Botany;
+using MoodSystem;
 
 /// <summary>
 /// Indicates an edible object
@@ -35,6 +36,13 @@ public class Edible : Consumable, ICheckedInteractable<HandActivate>
 	private RegisterItem item;
 
 	private string Name => itemAttributes.ArticleName;
+
+	/// <summary>
+	/// Determins of tasty this item is. On values different from <see cref="TasteQuality.NEUTRAL"/> adds a mood event to the player.
+	/// </summary>
+	[SerializeField]
+	[Tooltip("How much is this edible item tasty? Adds a mood event to the player on each bite.")]
+	private TasteQuality tasteQuality;
 
 	private void Awake()
 	{
@@ -113,6 +121,17 @@ public class Edible : Consumable, ICheckedInteractable<HandActivate>
 
 		eater.playerHealth.Metabolism
 			.AddEffect(new MetabolismEffect(NutritionLevel, 0, MetabolismDuration.Food));
+
+		if(eater.TryGetComponent(out PlayerMood mood))
+		{
+			if (tasteQuality.Equals(TasteQuality.NEUTRAL))
+			{
+				return;
+			}
+
+			MoodEventType tasteQualityMoodEvent = TasteQualityToEvent.ToEventType(tasteQuality);
+			mood.ServerAddMood(tasteQualityMoodEvent);
+		}
 
 		var feederSlot = feeder.ItemStorage.GetActiveHandSlot();
 		//If food has a stack component, decrease amount by one instead of deleting the entire stack.
